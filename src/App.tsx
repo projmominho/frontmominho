@@ -1,56 +1,77 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import type { Cupcake } from "./types";
+import { use } from "react";
+import { AppContext } from "./context";
 
-function App() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [cupcake, setCupcake] = useState<any>(null);
+export const App = () => {
+  const { baseurl } = use(AppContext);
+  const {
+    isPending,
+    error,
+    data: cupcakes,
+  } = useQuery<Cupcake[]>({
+    queryKey: ["repoData"],
+    queryFn: () => fetch(baseurl + "/cupcakes").then((res) => res.json()),
+  });
 
-  useEffect(() => {
-    fetch("https://backmominho.onrender.com/cupcake")
-      .then((res) => res.json())
-      .then((data) => setCupcake(data))
-      .catch((err) => console.error("Erro ao buscar cupcake:", err));
-  }, []);
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex items-center space-x-2">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600"></div>
+          <span className="text-xl font-semibold">Carregando...</span>
+        </div>
+      </div>
+    );
+  }
 
-  return (
-    <div className="min-h-screen bg-base-200 flex items-center justify-center">
-      <div className="card w-96 bg-base-100 card-xl shadow-sm">
-        <div className="card-body">
-          <h2 className="card-title">Mominho a sua loja de bolinhos</h2>
-          <p>Em construção</p>
-          <div
-            className="justify-end card-actions"
-            onClick={() => window.open("https://github.com/projmominho/")}
-          >
-            <button className="btn btn-primary">Ver no github</button>
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="alert alert-error shadow-lg">
+          <div>
+            <span>Ocorreu um erro ao carregar os cupcakes!</span>
           </div>
         </div>
       </div>
+    );
+  }
 
-      <div className="p-8 bg-white rounded-xl shadow-md">
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          Cupcake do Dia 🍰
-        </h1>
-        {cupcake ? (
-          <div className="space-y-2">
-            <p>
-              <strong>ID:</strong> {cupcake.id}
-            </p>
-            <p>
-              <strong>Nome:</strong> {cupcake.nome}
-            </p>
-            <p>
-              <strong>Preço:</strong> R$ {cupcake.preco.toFixed(2)}
-            </p>
-            <p>
-              <strong>Disponível:</strong> {cupcake.disponivel ? "Sim" : "Não"}
-            </p>
-          </div>
-        ) : (
-          <p>Carregando cupcake...</p>
-        )}
-      </div>
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <header className="text-center py-10">
+        <h1 className="text-4xl font-bold text-purple-600">Mominho</h1>
+        <h2 className="text-2xl mt-2">A Casa dos Bolinhos</h2>
+      </header>
+
+      <main className="container mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {cupcakes.map((cupcake) => (
+            <div
+              key={cupcake.id}
+              className="card bg-white shadow-lg rounded-lg overflow-hidden"
+            >
+              <figure>
+                <img
+                  src="https://via.placeholder.com/300x200"
+                  alt={cupcake.nome}
+                  className="w-full h-48 object-cover"
+                />
+              </figure>
+              <div className="card-body p-4">
+                <h3 className="text-xl font-semibold">{cupcake.nome}</h3>
+                <p className="text-gray-500">{cupcake.descricao}</p>
+                <div className="mt-4 flex justify-between items-center">
+                  <span className="text-lg font-bold">R${cupcake.preco}</span>
+                  <button className="btn btn-primary">
+                    Adicionar ao Carrinho
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
     </div>
   );
-}
-
-export default App;
+};
