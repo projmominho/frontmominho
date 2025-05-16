@@ -8,4 +8,5 @@ export type Cupcake = {
   peso: number;
   dimensoes: string;
   informacoesNutricionais: string;
+  imagem: string;
 };

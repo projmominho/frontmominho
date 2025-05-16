@@ -53,7 +53,7 @@ export const App = () => {
             >
               <figure>
                 <img
-                  src="https://via.placeholder.com/300x200"
+                  src={cupcake.imagem}
                   alt={cupcake.nome}
                   className="w-full h-48 object-cover"
                 />
