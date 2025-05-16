@@ -32,6 +32,7 @@ export const App = () => {
         <div className="alert alert-error shadow-lg">
           <div>
             <span>Ocorreu um erro ao carregar os cupcakes!</span>
+            <pre>{error.toString?.()}</pre>
           </div>
         </div>
       </div>
