@@ -63,11 +63,17 @@ export const App = () => {
                 />
               </figure>
               <div className="card-body p-4">
-                <h3 className="text-xl font-semibold">{cupcake.nome}</h3>
-                <p className="text-gray-500">{cupcake.descricao}</p>
+                <h3 className="text-xl font-semibold text-purple-900">
+                  {cupcake.nome}
+                </h3>
+                <p className="text-gray-500 text-purple-900">
+                  {cupcake.descricao}
+                </p>
                 <div className="mt-4 flex justify-between items-center">
-                  <span className="text-lg font-bold">R${cupcake.preco}</span>
-                  <button className="btn btn-primary">
+                  <span className="text-lg font-bold text-purple-900">
+                    R${cupcake.preco}
+                  </span>
+                  <button className="btn btn-primary text-white">
                     Adicionar ao Carrinho
                   </button>
                 </div>
