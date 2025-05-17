@@ -12,7 +12,7 @@ export const App = () => {
     data: cupcakes,
   } = useQuery<Cupcake[]>({
     queryKey: ["repoData"],
-    queryFn: () => fetch(baseurl + "/cupcakes").then((res) => res.json()),
+    queryFn: () => fetch(baseurl + "/cupcake").then((res) => res.json()),
   });
 
   if (isPending) {
