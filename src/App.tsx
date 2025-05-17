@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { Cupcake } from "./types";
 import { use } from "react";
 import { AppContext } from "./context";
-import logo from "./assets/logo.jpg";
+import logo from "./assets/logo.png";
 
 export const App = () => {
   const { baseurl } = use(AppContext);
@@ -39,12 +39,12 @@ export const App = () => {
     );
   }
   return (
-    <div className="min-h-screen bg-[#fdfcea]">
+    <div className="min-h-screen bg-yellow-100">
       <header className="flex items-center justify-center py-10">
         <img src={logo} alt="Logo" className="mr-4 w-35 h-35" />
         <div>
           <h1 className="text-4xl font-bold text-purple-600">Mominho</h1>
-          <h2 className="text-2xl text-purple-900">A Casa dos Bolinhos</h2>
+          <h2 className="text-2xl text-purple-900">sua casa de bolinhos</h2>
         </div>
       </header>
 
