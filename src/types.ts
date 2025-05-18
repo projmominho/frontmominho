@@ -3,7 +3,7 @@ export type Cupcake = {
   nome: string;
   descricao: string;
   preco: number;
-  disponivel: boolean;
+  disponibilidade: boolean;
   ingredientes: string;
   peso: number;
   dimensoes: string;
