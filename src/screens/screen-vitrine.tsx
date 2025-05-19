@@ -1,29 +1,32 @@
-import React, { use } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { Cupcake } from "../types";
-import { AppContext } from "../providers/context";
-import Loading from "../components/loading";
-import Error from "../components/error";
+import axios from "axios";
+import React, { use } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { Error, type ServiceError } from "../components/error";
+import { Loading } from "../components/loading";
+import { AppContext } from "../providers/context";
+import type { Cupcake } from "../types";
 
-const ScreenVitrine: React.FC = () => {
+export const ScreenVitrine: React.FC = () => {
   const { baseurl } = use(AppContext);
+  const navigate = useNavigate();
 
   const {
     isLoading,
     error,
     data: vitrine,
-  } = useQuery<Cupcake[]>({
+  } = useQuery<Cupcake[], ServiceError>({
     queryKey: ["vitrine"],
-    queryFn: () => fetch(baseurl + "/vitrine").then((res) => res.json()),
+    queryFn: () => axios.get(baseurl + "/vitrine").then((r) => r.data),
   });
 
   if (isLoading) {
-    return <Loading message="Carregando cupcakes..." />;
+    return <Loading message="Carregando bolinhos..." />;
   }
 
   if (error) {
-    return <Error message="Erro ao carregar cupcakes" />;
+    return <Error message="Erro ao carregar bolinhos" error={error} />;
   }
 
   return (
@@ -67,7 +70,12 @@ const ScreenVitrine: React.FC = () => {
                   <div className="text-lg font-bold">
                     R$ {cupcake?.preco?.toFixed?.(2)}
                   </div>
-                  <div className="btn btn-primary text-white">Ver detalhes</div>
+                  <div
+                    className="btn btn-primary text-white"
+                    onClick={() => navigate(`detalhes/${cupcake.id}`)}
+                  >
+                    Ver detalhes
+                  </div>
                 </div>
               </div>
             </div>
@@ -77,5 +85,3 @@ const ScreenVitrine: React.FC = () => {
     </div>
   );
 };
-
-export default ScreenVitrine;

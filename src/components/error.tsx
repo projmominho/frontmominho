@@ -1,9 +1,13 @@
 import React from "react";
 import logo from "../assets/logo.png";
+import type { AxiosError } from "axios";
 
-const Error: React.FC<{ message?: string }> = ({
-  message = "Ocorreu um erro.",
-}) => {
+export type ServiceError = AxiosError<{ detail: { message: string } }>;
+
+export const Error: React.FC<{
+  message?: string;
+  error?: ServiceError;
+}> = ({ message = "Ocorreu um erro.", error }) => {
   return (
     <div className="flex justify-center items-center h-screen bg-yellow-100">
       <div className="text-center">
@@ -16,12 +20,12 @@ const Error: React.FC<{ message?: string }> = ({
 
         <div className="mt-8 alert alert-error shadow-lg">
           <div>
-            <span className="text-xl font-semibold">{message}</span>
+            <span className="text-xl font-semibold">
+              {error?.response?.data?.detail?.message || message} 😢
+            </span>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
-export default Error;

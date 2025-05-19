@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.png";
 
-const Loading: React.FC<{ message?: string }> = ({
+export const Loading: React.FC<{ message?: string }> = ({
   message = "Carregando...",
 }) => {
   return (
@@ -22,5 +22,3 @@ const Loading: React.FC<{ message?: string }> = ({
     </div>
   );
 };
-
-export default Loading;
