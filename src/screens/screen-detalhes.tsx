@@ -3,9 +3,9 @@ import axios from "axios";
 import React, { use } from "react";
 import ModalImage from "react-modal-image";
 import { useParams } from "react-router-dom";
-import logo from "../assets/logo.png";
 import { type ServiceError, Error } from "../components/error";
 import { Loading } from "../components/loading";
+import { LogoTitle } from "../components/logo-title";
 import { AppContext } from "../providers/context";
 import type { Cupcake } from "../types";
 
@@ -37,26 +37,16 @@ export const ScreenDetalhes: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-yellow-100">
-      <div className="flex items-center justify-center pt-8">
-        <img src={logo} alt="Logo" className="w-32 h-32" />
-      </div>
+    <div className="min-h-screen">
+      <LogoTitle title={cupcake?.nome} subtitle="Detalhes do bolinho" />
 
-      <div className="flex flex-col items-center justify-center pt-4">
-        <div className="text-4xl font-bold text-purple-600">
-          {cupcake?.nome}
-        </div>
-        <div className="pt-2 text-2xl">Detalhes do bolinho</div>
-      </div>
-
-      <div className="container mx-auto px-4 pt-8">
+      <div className="container mx-auto pt-8 px-4">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative">
             <ModalImage
               small={cupcake?.imagem || ""}
               large={cupcake?.imagem}
               alt={cupcake?.nome}
-              className="w-full h-full object-cover"
             />
 
             {/* Emoji de lupa e texto */}
@@ -101,7 +91,7 @@ export const ScreenDetalhes: React.FC = () => {
                   <label className="mr-2">Quantidade:</label>
                   <input
                     id="quantidade"
-                    type="number"
+                    type="tel"
                     defaultValue={1}
                     min={1}
                     className={`input input-primary w-24 ${

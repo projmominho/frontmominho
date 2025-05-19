@@ -1,6 +1,7 @@
 import React from "react";
-import logo from "../assets/logo.png";
 import type { AxiosError } from "axios";
+import { Link } from "react-router-dom"; // Importando Link para navegação
+import { LogoTitle } from "./logo-title";
 
 export type ServiceError = AxiosError<{ detail: { message: string } }>;
 
@@ -9,21 +10,27 @@ export const Error: React.FC<{
   error?: ServiceError;
 }> = ({ message = "Ocorreu um erro.", error }) => {
   return (
-    <div className="flex justify-center items-center h-screen bg-yellow-100">
+    <div className="flex justify-center items-center h-screen">
       <div className="text-center">
-        <div className="flex justify-center py-8">
-          <img src={logo} alt="Logo" className="w-32 h-32" />
+        <LogoTitle title="Mominho" subtitle="😨 PANE NO SISTEMA 😱" />
+
+        <div className="mt-8 alert alert-error mx-4">
+          <pre className="text-xl font-semibold">
+            {error?.response?.data?.detail?.message || message} 😢
+          </pre>
         </div>
 
-        <div className="text-4xl font-bold text-purple-600">Mominho</div>
-        <div className="text-2xl">sua casa de bolinhos</div>
+        <div className="mt-4 flex">
+          <Link to="/" className="btn btn-primary text-white text-lg">
+            🏠 Ir pra Home
+          </Link>
 
-        <div className="mt-8 alert alert-error shadow-lg">
-          <div>
-            <span className="text-xl font-semibold">
-              {error?.response?.data?.detail?.message || message} 😢
-            </span>
-          </div>
+          <a
+            href="mailto:projmominho@proton.me"
+            className="btn btn-secondary text-white text-lg ml-2"
+          >
+            📧 Entrar em Contato
+          </a>
         </div>
       </div>
     </div>

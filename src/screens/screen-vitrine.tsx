@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import React, { use } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
 import { Error, type ServiceError } from "../components/error";
 import { Loading } from "../components/loading";
+import { LogoTitle } from "../components/logo-title";
 import { AppContext } from "../providers/context";
 import type { Cupcake } from "../types";
 
@@ -30,16 +30,10 @@ export const ScreenVitrine: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-yellow-100">
-      <div className="flex items-center justify-center py-8">
-        <img src={logo} alt="Logo" className="w-32 h-32" />
-        <div className="pl-8">
-          <div className="text-4xl font-bold text-purple-600">Mominho</div>
-          <div className="pt-2 text-2xl">sua casa de bolinhos</div>
-        </div>
-      </div>
+    <div className="min-h-screen">
+      <LogoTitle />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 pt-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {vitrine?.map?.((cupcake) => (
             <div
