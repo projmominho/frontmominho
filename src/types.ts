@@ -7,6 +7,27 @@ export type Cupcake = {
   ingredientes: string;
   peso: number;
   dimensoes: string;
-  informacoesNutricionais: string;
+  informacoes_nutricionais: string;
   imagem: string;
+};
+
+export type CartItem = {
+  cupcake: Cupcake;
+  quantidade: number;
+  observacoes: string;
+};
+
+export type ItemResumoPedido = {
+  nome: string;
+  quantidade: number;
+  valor_unitario: number;
+  subtotal: number;
+};
+
+export type ResumoPedido = {
+  telefone: string;
+  endereco: string;
+  itens: ItemResumoPedido[];
+  valor_total: number;
+  valor_pago: number;
 };

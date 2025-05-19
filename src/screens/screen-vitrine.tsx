@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { use } from "react";
 import { useNavigate } from "react-router-dom";
 import { Error, type ServiceError } from "../components/error";
+import { Header } from "../components/header";
 import { Loading } from "../components/loading";
 import { LogoTitle } from "../components/logo-title";
 import { AppContext } from "../providers/context";
@@ -31,6 +32,7 @@ export const ScreenVitrine: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <Header />
       <LogoTitle />
 
       <div className="container mx-auto px-4 pt-8">
@@ -40,16 +42,17 @@ export const ScreenVitrine: React.FC = () => {
               key={cupcake.id}
               className="card bg-white shadow-lg rounded-lg overflow-hidden"
             >
-              <div className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
+              <div
+                className="w-full h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative"
+                onClick={() => navigate(`detalhes/${cupcake.id}`)}
+              >
                 <img
                   src={cupcake.imagem}
                   alt={cupcake.nome}
                   className="w-full h-48 object-cover"
                 />
-              </div>
-              <div className="card-body p-4">
-                {/* Badge de disponibilidade */}
-                <div className="mb-2">
+
+                <div className="mb-2 absolute bottom-0 right-0">
                   <div
                     className={`badge ${
                       cupcake.disponibilidade ? "badge-success" : "badge-error"
@@ -58,6 +61,8 @@ export const ScreenVitrine: React.FC = () => {
                     {cupcake.disponibilidade ? "Disponível" : "Indisponível"}
                   </div>
                 </div>
+              </div>
+              <div className="card-body p-4">
                 <div className="text-xl font-semibold">{cupcake.nome}</div>
                 <div className="pt-2 text-gray-700">{cupcake.descricao}</div>
                 <div className="mt-4 flex justify-between items-center">

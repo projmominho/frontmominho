@@ -1,0 +1,111 @@
+import { Autocomplete } from "@react-google-maps/api";
+import { useMutation } from "@tanstack/react-query";
+import axios, { AxiosError } from "axios";
+import React, { use, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { Header } from "../components/header";
+import { LogoTitle } from "../components/logo-title";
+import { AppContext } from "../providers/context";
+
+export const ScreenEnvio: React.FC = () => {
+  const { baseurl, cart, address, addressAdd, phone, phoneAdd } =
+    use(AppContext);
+
+  const autocompleteRef = useRef<google.maps.places.Autocomplete>(null);
+  const navigate = useNavigate();
+
+  function onLoad(autocomplete: google.maps.places.Autocomplete) {
+    autocompleteRef.current = autocomplete;
+  }
+
+  function locationSelected() {
+    const formatted_address =
+      autocompleteRef?.current?.getPlace?.()?.formatted_address;
+    if (!formatted_address) {
+      return;
+    }
+
+    addressAdd(formatted_address);
+  }
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const payload = {
+        cart: cart.map?.((c) => ({
+          id: c.cupcake.id,
+          quantidade: c.quantidade,
+          observacoes: c.observacoes,
+        })),
+        address,
+        phone,
+      };
+      return axios.post(baseurl + "/pedido-iniciar", payload);
+    },
+    onError: (error: AxiosError<{ detail: string }>) => {
+      alert(`Erro na requisição ${error?.response?.data?.detail}`);
+    },
+    onSuccess: (response) => {
+      navigate(`/pagamento/${response?.data?.pedido_id}`);
+    },
+  });
+
+  return (
+    <div className="min-h-screen">
+      <Header />
+      <LogoTitle title="Dados de envio" subtitle="Pra onde chefe?" />
+
+      <div className="container mx-auto pt-8 px-4">
+        <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
+          <div className="card-body p-4">
+            <div className="mb-4">
+              <label htmlFor="telefone" className="block text-lg font-semibold">
+                Telefone:
+              </label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                value={phone}
+                onChange={(e) => phoneAdd(e.target.value)}
+                placeholder="(XX) XXXXX-XXXX"
+                className="input input-primary w-full mt-2"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="endereco" className="block text-lg font-semibold">
+                Endereço de Entrega:
+              </label>
+              <Autocomplete onLoad={onLoad} onPlaceChanged={locationSelected}>
+                <input
+                  type="text"
+                  id="endereco"
+                  name="endereco"
+                  defaultValue={address}
+                  placeholder="Digite o endereço de entrega"
+                  className="input input-primary w-full mt-2"
+                  required
+                />
+              </Autocomplete>
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary mt-4 w-full"
+              onClick={() => !mutation?.isPending && mutation.mutate()}
+            >
+              {!mutation?.isPending
+                ? "Continuar para Pagamento"
+                : "Gravando pedido..."}
+
+              {!mutation?.isPending ? null : (
+                <span className="animate-bounce">{`🧁`}</span>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
