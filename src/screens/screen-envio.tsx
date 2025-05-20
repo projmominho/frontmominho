@@ -44,7 +44,7 @@ export const ScreenEnvio: React.FC = () => {
     },
     onSuccess: (response) => {
       cleanCart();
-      navigate(`/pagamento/${response?.data?.pedido_id}`);
+      navigate(`/pagamento/${response?.data?.pedido_id}?telefone=${phone}`);
     },
   });
 
