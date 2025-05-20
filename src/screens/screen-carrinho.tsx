@@ -59,16 +59,17 @@ export const ScreenCarrinho: React.FC = () => {
         subtitle="Dá uma conferida antes do envio!"
       />
 
-      <div className="container mx-auto pt-8 px-4 max-w-[1000px]">
+      <div className="container mx-auto pt-8 max-w-[1000px]">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
-          <div className="card-body p-4">
+          <div className="card-body p-1">
             <table className="table w-full">
               <thead>
                 <tr>
                   <th>Nome</th>
                   <th>Valor</th>
-                  <th>Quantidade</th>
+                  <th>Quant.</th>
                   <th>Subtotal</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -83,24 +84,25 @@ export const ScreenCarrinho: React.FC = () => {
                           min="1"
                           defaultValue={item.quantidade}
                           onChange={(e) => handleQuantidadeChange(item, parseInt(e.target.value, 10))}
-                          className="input input-primary w-12"
+                          className="input input-primary"
                         />
-
+                      </td>
+                      <td className="text-lg font-bold">R$ {(item.cupcake.preco * item.quantidade).toFixed(2)}</td>
+                      <td>
                         <button
                           onClick={() => cartDelete(item)}
-                          className="ml-2"
+                          className="pr-2 py-2"
                           aria-label="Deletar item"
                         >
                           ❌
                         </button>
                       </td>
-                      <td className="text-lg font-bold">R$ {(item.cupcake.preco * item.quantidade).toFixed(2)}</td>
                     </tr>
 
                     {!item?.observacoes ? null : (
                       <tr>
                         <td
-                          colSpan={4}
+                          colSpan={5}
                           className="text-xs"
                         >
                           {item.observacoes ? `observações: ${item.observacoes}` : "Sem observações"}
