@@ -56,7 +56,7 @@ export const ScreenStatus: React.FC = () => {
         subtitle="acompanhe seu pedido"
       />
 
-      <div className="container mx-auto pt-8 px-4">
+      <div className="container mx-auto pt-8 px-4 max-w-[1000px]">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden mb-8">
           <div className="card-body p-6 flex flex-col items-center">
             <div className="w-full text-lg font-bold mb-2">Resumo do pedido:</div>

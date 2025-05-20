@@ -62,7 +62,7 @@ export const ScreenPagamento: React.FC = () => {
         subtitle="fiado só amanhã"
       />
 
-      <div className="container mx-auto pt-8 px-4">
+      <div className="container mx-auto pt-8 px-4 max-w-[1000px]">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="card-body p-6 flex flex-col items-center">
             <div className="w-full text-lg font-bold">Resumo do pedido:</div>
