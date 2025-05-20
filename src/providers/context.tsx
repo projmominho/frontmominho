@@ -4,6 +4,7 @@ import type { CartItem } from "../types";
 type AppContextType = {
   baseurl: string;
   cart: CartItem[];
+  cleanCart: () => void;
   cartAdd: (cartItem: CartItem) => void;
   cartDelete: (cartItem: CartItem) => void;
   address: string;
@@ -15,6 +16,7 @@ type AppContextType = {
 export const AppContext = createContext<AppContextType>({
   baseurl: import.meta.env.VITE_BASE_URL,
   cart: [],
+  cleanCart: () => {},
   cartAdd: () => {},
   cartDelete: () => {},
   address: "",

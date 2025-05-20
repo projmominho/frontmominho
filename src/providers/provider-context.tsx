@@ -14,6 +14,11 @@ export const ProviderContext: FC<PropsWithChildren> = ({ children }) => {
 
   const [cart, setCart] = useState<CartItem[]>(loadLocalStorage("cart", []));
 
+  const cleanCart = () => {
+    setCart([]);
+    saveLocalStorage("cart", []);
+  };
+
   const cartAdd = useCallback(
     (cartItem: CartItem) =>
       setCart((p) => {
@@ -29,9 +34,7 @@ export const ProviderContext: FC<PropsWithChildren> = ({ children }) => {
   const cartDelete = useCallback(
     (cartItem: CartItem) => {
       setCart((prevCart) => {
-        const newCart = prevCart.filter(
-          (c) => c.cupcake.id !== cartItem.cupcake.id
-        );
+        const newCart = prevCart.filter((c) => c.cupcake.id !== cartItem.cupcake.id);
         saveLocalStorage("cart", newCart);
         return newCart;
       });
@@ -39,9 +42,7 @@ export const ProviderContext: FC<PropsWithChildren> = ({ children }) => {
     [setCart]
   );
 
-  const [address, setAddress] = useState<string>(
-    loadLocalStorage("address", "")
-  );
+  const [address, setAddress] = useState<string>(loadLocalStorage("address", ""));
 
   const addressAdd = useCallback(
     (newAddress: string) => {
@@ -66,6 +67,7 @@ export const ProviderContext: FC<PropsWithChildren> = ({ children }) => {
       value={{
         baseurl: import.meta.env.VITE_BASE_URL,
         cart,
+        cleanCart,
         cartAdd,
         cartDelete,
         address,

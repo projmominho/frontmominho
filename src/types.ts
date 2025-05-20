@@ -31,3 +31,8 @@ export type ResumoPedido = {
   valor_total: number;
   valor_pago: number;
 };
+
+export type PedidoStatus = {
+  status: string;
+  data_status: string;
+};

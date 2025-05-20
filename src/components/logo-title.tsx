@@ -7,15 +7,16 @@ interface LogoTitleProps {
   subtitle?: string;
 }
 
-export const LogoTitle: React.FC<LogoTitleProps> = ({
-  title = "Mominho",
-  subtitle = "sua casa de bolinhos",
-}) => {
+export const LogoTitle: React.FC<LogoTitleProps> = ({ title = "Mominho", subtitle = "sua casa de bolinhos" }) => {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-center pt-8">
         <Link to="/">
-          <img src={logo} alt="Logo" className="w-32 h-32" />
+          <img
+            src={logo}
+            alt="Logo"
+            className="w-32 h-32"
+          />
         </Link>
       </div>
 

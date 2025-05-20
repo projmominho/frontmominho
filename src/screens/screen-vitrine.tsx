@@ -27,7 +27,12 @@ export const ScreenVitrine: React.FC = () => {
   }
 
   if (error) {
-    return <Error message="Erro ao carregar bolinhos" error={error} />;
+    return (
+      <Error
+        message="Erro ao carregar bolinhos"
+        error={error}
+      />
+    );
   }
 
   return (
@@ -53,11 +58,7 @@ export const ScreenVitrine: React.FC = () => {
                 />
 
                 <div className="mb-2 absolute bottom-0 right-0">
-                  <div
-                    className={`badge ${
-                      cupcake.disponibilidade ? "badge-success" : "badge-error"
-                    } px-3 py-1 rounded-full text-white text-sm font-medium`}
-                  >
+                  <div className={`badge ${cupcake.disponibilidade ? "badge-success" : "badge-error"} px-3 py-1 rounded-full text-white text-sm font-medium`}>
                     {cupcake.disponibilidade ? "Disponível" : "Indisponível"}
                   </div>
                 </div>
@@ -66,9 +67,7 @@ export const ScreenVitrine: React.FC = () => {
                 <div className="text-xl font-semibold">{cupcake.nome}</div>
                 <div className="pt-2 text-gray-700">{cupcake.descricao}</div>
                 <div className="mt-4 flex justify-between items-center">
-                  <div className="text-lg font-bold">
-                    R$ {cupcake?.preco?.toFixed?.(2)}
-                  </div>
+                  <div className="text-lg font-bold">R$ {cupcake?.preco?.toFixed?.(2)}</div>
                   <div
                     className="btn btn-primary text-white"
                     onClick={() => navigate(`detalhes/${cupcake.id}`)}

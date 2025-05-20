@@ -9,10 +9,7 @@ export const ScreenCarrinho: React.FC = () => {
   const { cart, cartAdd, cartDelete } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const orderedCart = useMemo(
-    () => cart?.sort((a, b) => a.cupcake.id - b.cupcake.id),
-    [cart]
-  );
+  const orderedCart = useMemo(() => cart?.sort((a, b) => a.cupcake.id - b.cupcake.id), [cart]);
 
   const handleQuantidadeChange = (item: CartItem, quantidade: number) => {
     if (isNaN(quantidade) || quantidade <= 0) {
@@ -85,12 +82,7 @@ export const ScreenCarrinho: React.FC = () => {
                           type="number"
                           min="1"
                           defaultValue={item.quantidade}
-                          onChange={(e) =>
-                            handleQuantidadeChange(
-                              item,
-                              parseInt(e.target.value, 10)
-                            )
-                          }
+                          onChange={(e) => handleQuantidadeChange(item, parseInt(e.target.value, 10))}
                           className="input input-primary w-12"
                         />
 
@@ -102,17 +94,16 @@ export const ScreenCarrinho: React.FC = () => {
                           ❌
                         </button>
                       </td>
-                      <td className="text-lg font-bold">
-                        R$ {(item.cupcake.preco * item.quantidade).toFixed(2)}
-                      </td>
+                      <td className="text-lg font-bold">R$ {(item.cupcake.preco * item.quantidade).toFixed(2)}</td>
                     </tr>
 
                     {!item?.observacoes ? null : (
                       <tr>
-                        <td colSpan={4} className="text-xs">
-                          {item.observacoes
-                            ? `observações: ${item.observacoes}`
-                            : "Sem observações"}
+                        <td
+                          colSpan={4}
+                          className="text-xs"
+                        >
+                          {item.observacoes ? `observações: ${item.observacoes}` : "Sem observações"}
                         </td>
                       </tr>
                     )}
@@ -121,9 +112,7 @@ export const ScreenCarrinho: React.FC = () => {
               </tbody>
             </table>
 
-            <div className="mt-4 text-xl font-bold">
-              Total do Pedido: R$ {totalPedido.toFixed(2)}
-            </div>
+            <div className="mt-4 text-xl font-bold">Total do Pedido: R$ {totalPedido.toFixed(2)}</div>
 
             <button
               className="btn btn-primary mt-4 w-full"

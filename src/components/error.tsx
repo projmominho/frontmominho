@@ -9,15 +9,14 @@ export const Error: React.FC<{
   subtitle?: string;
   message?: string;
   error?: ServiceError;
-}> = ({
-  subtitle = "😨 PANE NO SISTEMA 😱",
-  message = "Ocorreu um erro.",
-  error,
-}) => {
+}> = ({ subtitle = "😨 PANE NO SISTEMA 😱", message = "Ocorreu um erro.", error }) => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="text-center">
-        <LogoTitle title="Mominho" subtitle={subtitle} />
+        <LogoTitle
+          title="Mominho"
+          subtitle={subtitle}
+        />
 
         <div className="mt-8 w-full alert alert-error">
           <pre
@@ -29,7 +28,10 @@ export const Error: React.FC<{
         </div>
 
         <div className="mt-4 flex justify-center w-full">
-          <Link to="/" className="btn btn-primary text-white text-lg">
+          <Link
+            to="/"
+            className="btn btn-primary text-white text-lg"
+          >
             🏠 Ir pra Home
           </Link>
 

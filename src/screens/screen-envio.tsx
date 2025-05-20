@@ -8,8 +8,7 @@ import { LogoTitle } from "../components/logo-title";
 import { AppContext } from "../providers/context";
 
 export const ScreenEnvio: React.FC = () => {
-  const { baseurl, cart, address, addressAdd, phone, phoneAdd } =
-    use(AppContext);
+  const { baseurl, cart, address, addressAdd, phone, phoneAdd, cleanCart } = use(AppContext);
 
   const autocompleteRef = useRef<google.maps.places.Autocomplete>(null);
   const navigate = useNavigate();
@@ -19,8 +18,7 @@ export const ScreenEnvio: React.FC = () => {
   }
 
   function locationSelected() {
-    const formatted_address =
-      autocompleteRef?.current?.getPlace?.()?.formatted_address;
+    const formatted_address = autocompleteRef?.current?.getPlace?.()?.formatted_address;
     if (!formatted_address) {
       return;
     }
@@ -45,6 +43,7 @@ export const ScreenEnvio: React.FC = () => {
       alert(`Erro na requisição ${error?.response?.data?.detail}`);
     },
     onSuccess: (response) => {
+      cleanCart();
       navigate(`/pagamento/${response?.data?.pedido_id}`);
     },
   });
@@ -52,13 +51,19 @@ export const ScreenEnvio: React.FC = () => {
   return (
     <div className="min-h-screen">
       <Header />
-      <LogoTitle title="Dados de envio" subtitle="Pra onde chefe?" />
+      <LogoTitle
+        title="Dados de envio"
+        subtitle="Pra onde chefe?"
+      />
 
       <div className="container mx-auto pt-8 px-4">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="card-body p-4">
             <div className="mb-4">
-              <label htmlFor="telefone" className="block text-lg font-semibold">
+              <label
+                htmlFor="telefone"
+                className="block text-lg font-semibold"
+              >
                 Telefone:
               </label>
               <input
@@ -74,10 +79,16 @@ export const ScreenEnvio: React.FC = () => {
             </div>
 
             <div className="mb-4">
-              <label htmlFor="endereco" className="block text-lg font-semibold">
+              <label
+                htmlFor="endereco"
+                className="block text-lg font-semibold"
+              >
                 Endereço de Entrega:
               </label>
-              <Autocomplete onLoad={onLoad} onPlaceChanged={locationSelected}>
+              <Autocomplete
+                onLoad={onLoad}
+                onPlaceChanged={locationSelected}
+              >
                 <input
                   type="text"
                   id="endereco"
@@ -95,13 +106,9 @@ export const ScreenEnvio: React.FC = () => {
               className="btn btn-primary mt-4 w-full"
               onClick={() => !mutation?.isPending && mutation.mutate()}
             >
-              {!mutation?.isPending
-                ? "Continuar para Pagamento"
-                : "Gravando pedido..."}
+              {!mutation?.isPending ? "Continuar para Pagamento" : "Gravando pedido..."}
 
-              {!mutation?.isPending ? null : (
-                <span className="animate-bounce">{`🧁`}</span>
-              )}
+              {!mutation?.isPending ? null : <span className="animate-bounce">{`🧁`}</span>}
             </button>
           </div>
         </div>

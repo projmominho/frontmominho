@@ -1,9 +1,7 @@
 import React from "react";
 import { LogoTitle } from "./logo-title";
 
-export const Loading: React.FC<{ message?: string }> = ({
-  message = "Carregando...",
-}) => {
+export const Loading: React.FC<{ message?: string }> = ({ message = "Carregando..." }) => {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="text-center">

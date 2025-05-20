@@ -3,6 +3,7 @@ import { ProviderContext } from "./provider-context";
 import { ProviderQuery } from "./provider-query";
 import { ProviderRouter } from "./provider-router";
 import { LoadScript } from "@react-google-maps/api";
+import { Toaster } from "react-hot-toast";
 
 const libraries = ["places"] as any;
 
@@ -16,6 +17,15 @@ export const Providers: React.FC<PropsWithChildren> = ({ children }) => {
       <ProviderContext>
         <ProviderQuery>
           <ProviderRouter>{children}</ProviderRouter>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              className: "bg-black shadow-lg border border-base-200 max-w-fit w-auto min-w-0",
+              style: {
+                maxWidth: "none",
+              },
+            }}
+          />
         </ProviderQuery>
       </ProviderContext>
     </LoadScript>

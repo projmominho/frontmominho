@@ -5,16 +5,36 @@ import { ScreenDetalhes } from "../screens/screen-detalhes";
 import { ScreenCarrinho } from "../screens/screen-carrinho";
 import { ScreenEnvio } from "../screens/screen-envio";
 import { ScreenPagamento } from "../screens/screen-pagamento";
+import { ScreenStatus } from "../screens/screen-status";
 
 export const ProviderRouter: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ScreenVitrine />} />
-        <Route path="/detalhes/:id" element={<ScreenDetalhes />} />
-        <Route path="/carrinho" element={<ScreenCarrinho />} />
-        <Route path="/envio" element={<ScreenEnvio />} />
-        <Route path="/pagamento/:id" element={<ScreenPagamento />} />
+        <Route
+          path="/"
+          element={<ScreenVitrine />}
+        />
+        <Route
+          path="/detalhes/:id"
+          element={<ScreenDetalhes />}
+        />
+        <Route
+          path="/carrinho"
+          element={<ScreenCarrinho />}
+        />
+        <Route
+          path="/envio"
+          element={<ScreenEnvio />}
+        />
+        <Route
+          path="/pagamento/:id"
+          element={<ScreenPagamento />}
+        />
+        <Route
+          path="/status/:id"
+          element={<ScreenStatus />}
+        />
         {children}
       </Routes>
     </BrowserRouter>

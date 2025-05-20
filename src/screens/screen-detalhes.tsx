@@ -14,9 +14,7 @@ import { CartButton } from "../components/cart-button";
 export const ScreenDetalhes: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { baseurl, cart, cartAdd } = use(AppContext);
-  const [quantidade, setQuantidade] = useState<number>(
-    cart?.find((c) => c.cupcake.id === Number(id))?.quantidade || 1
-  );
+  const [quantidade, setQuantidade] = useState<number>(cart?.find((c) => c.cupcake.id === Number(id))?.quantidade || 1);
 
   const observacoesRef = useRef<HTMLInputElement>(null);
 
@@ -50,14 +48,20 @@ export const ScreenDetalhes: React.FC = () => {
 
   if (error) {
     return (
-      <Error message="Erro ao carregar detalhes do bolinho" error={error} />
+      <Error
+        message="Erro ao carregar detalhes do bolinho"
+        error={error}
+      />
     );
   }
 
   return (
     <div className="min-h-screen">
       <Header />
-      <LogoTitle title={cupcake?.nome} subtitle="Detalhes do bolinho" />
+      <LogoTitle
+        title={cupcake?.nome}
+        subtitle="Detalhes do bolinho"
+      />
 
       <div className="container max-w-[1000px] mx-auto pt-8 px-4">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
@@ -74,11 +78,7 @@ export const ScreenDetalhes: React.FC = () => {
             </div>
 
             <div className="mb-2 absolute top-0 left-0  pointer-events-none">
-              <div
-                className={`badge ${
-                  cupcake?.disponibilidade ? "badge-success" : "badge-error"
-                } px-3 py-1 rounded-full text-white text-sm font-medium`}
-              >
+              <div className={`badge ${cupcake?.disponibilidade ? "badge-success" : "badge-error"} px-3 py-1 rounded-full text-white text-sm font-medium`}>
                 {cupcake?.disponibilidade ? "Disponível" : "Indisponível"}
               </div>
             </div>
@@ -88,30 +88,18 @@ export const ScreenDetalhes: React.FC = () => {
             <div className="text-gray-700 mb-4">{cupcake?.descricao}</div>
 
             <div className="text-lg font-semibold">Ingredientes:</div>
-            <div className="text-gray-700 mb-4">
-              {cupcake?.ingredientes || "Não informado"}
-            </div>
+            <div className="text-gray-700 mb-4">{cupcake?.ingredientes || "Não informado"}</div>
 
             <div className="text-lg font-semibold">Peso:</div>
-            <div className="text-gray-700 mb-4">
-              {cupcake?.peso ? `${cupcake.peso} gramas` : "Não informado"}
-            </div>
+            <div className="text-gray-700 mb-4">{cupcake?.peso ? `${cupcake.peso} gramas` : "Não informado"}</div>
 
             <div className="text-lg font-semibold">Dimensões:</div>
-            <div className="text-gray-700 mb-4">
-              {cupcake?.dimensoes || "Não informado"}
-            </div>
+            <div className="text-gray-700 mb-4">{cupcake?.dimensoes || "Não informado"}</div>
 
-            <div className="text-lg font-semibold">
-              Informações Nutricionais:
-            </div>
-            <div className="text-gray-700 mb-4">
-              {cupcake?.informacoes_nutricionais || "Não informado"}
-            </div>
+            <div className="text-lg font-semibold">Informações Nutricionais:</div>
+            <div className="text-gray-700 mb-4">{cupcake?.informacoes_nutricionais || "Não informado"}</div>
 
-            <div className="text-lg font-bold">
-              R$ {cupcake?.preco?.toFixed?.(2)} cada
-            </div>
+            <div className="text-lg font-bold">R$ {cupcake?.preco?.toFixed?.(2)} cada</div>
 
             {!cupcake?.disponibilidade ? null : (
               <>
@@ -132,9 +120,7 @@ export const ScreenDetalhes: React.FC = () => {
                       <label className="mr-2">Quantidade:</label>
                       <input
                         id="quantidade"
-                        onChange={(e) =>
-                          setQuantidade(parseInt(e.target.value, 10) || 1)
-                        }
+                        onChange={(e) => setQuantidade(parseInt(e.target.value, 10) || 1)}
                         type="tel"
                         defaultValue={quantidade}
                         min={1}
@@ -142,27 +128,18 @@ export const ScreenDetalhes: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <div className="text-2xl font-bold pl-2">
-                    Total R${" "}
-                    {((cupcake?.preco || 0) * quantidade)?.toFixed?.(2)}
-                  </div>
+                  <div className="text-2xl font-bold pl-2">Total R$ {((cupcake?.preco || 0) * quantidade)?.toFixed?.(2)}</div>
                 </div>
               </>
             )}
 
             <div className="flex items-center mt-4">
               <button
-                className={`btn btn-primary text-white ${
-                  cupcake?.disponibilidade
-                    ? ""
-                    : "btn-disabled cursor-not-allowed"
-                } flex-1`}
+                className={`btn btn-primary text-white ${cupcake?.disponibilidade ? "" : "btn-disabled cursor-not-allowed"} flex-1`}
                 onClick={() => cupcake?.disponibilidade && adicionarCarrinho()}
                 disabled={!cupcake?.disponibilidade}
               >
-                {cupcake?.disponibilidade
-                  ? "Adicionar ao Carrinho"
-                  : "Bolinho indisponível"}
+                {cupcake?.disponibilidade ? "Adicionar ao Carrinho" : "Bolinho indisponível"}
               </button>
 
               <CartButton />
