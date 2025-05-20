@@ -1,10 +1,10 @@
 import React from "react";
 import type { ResumoPedido } from "../types";
 
-export const CardResumo: React.FC<{ pedido?: ResumoPedido }> = ({ pedido }) => (
+export const CardResumo: React.FC<{ id?: string; pedido?: ResumoPedido }> = ({ id, pedido }) => (
   <div className="border w-full rounded-lg p-4 bg-gray-50 shadow-sm">
     <div className="mb-2">
-      <span className="text-xl font-semibold">Pedido n°:</span> {pedido?.telefone}
+      <span className="text-xl font-semibold">Pedido n°:</span> {id}
     </div>
     <div className="mb-2">
       <span className="font-semibold">Telefone:</span> {pedido?.telefone}

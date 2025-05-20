@@ -60,7 +60,10 @@ export const ScreenStatus: React.FC = () => {
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden mb-8">
           <div className="card-body p-6 flex flex-col items-center">
             <div className="w-full text-lg font-bold mb-2">Resumo do pedido:</div>
-            <CardResumo pedido={pedido} />
+            <CardResumo
+              id={id}
+              pedido={pedido}
+            />
 
             {pedido && pedido.valor_pago === 0 && (
               <div className="w-full pd-4 flex justify-center items-center">

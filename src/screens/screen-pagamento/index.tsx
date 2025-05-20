@@ -66,7 +66,10 @@ export const ScreenPagamento: React.FC = () => {
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="card-body p-6 flex flex-col items-center">
             <div className="w-full text-lg font-bold">Resumo do pedido:</div>
-            <CardResumo pedido={pedido} />
+            <CardResumo
+              id={id}
+              pedido={pedido}
+            />
 
             <div className="w-full text-lg font-bold">Forma de pagamento:</div>
             <div className="flex gap-4 mb-6">
