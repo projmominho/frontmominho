@@ -56,7 +56,7 @@ export const ScreenEnvio: React.FC = () => {
         subtitle="Pra onde chefe?"
       />
 
-      <div className="container mx-auto pt-8 px-4">
+      <div className="container mx-auto pt-8 px-4 max-w-[1000px]">
         <div className="card bg-white shadow-lg rounded-lg overflow-hidden">
           <div className="card-body p-4">
             <div className="mb-4">
