@@ -35,6 +35,10 @@ export const ProviderRouter: React.FC<PropsWithChildren> = ({ children }) => {
           path="/status/:id"
           element={<ScreenStatus />}
         />
+        <Route
+          path="/pedido/:id"
+          element={<ScreenStatus />}
+        />
         {children}
       </Routes>
     </BrowserRouter>
