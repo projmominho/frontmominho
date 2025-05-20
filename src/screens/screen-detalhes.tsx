@@ -10,6 +10,7 @@ import { AppContext } from "../providers/context";
 import type { Cupcake } from "../types";
 import { Header } from "../components/header";
 import { CartButton } from "../components/cart-button";
+import toast from "react-hot-toast";
 
 export const ScreenDetalhes: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -31,7 +32,7 @@ export const ScreenDetalhes: React.FC = () => {
     const observacoes = observacoesRef?.current?.value || "";
 
     if (isNaN(quantidade) || quantidade <= 0) {
-      alert("Por favor, insira uma quantidade válida.");
+      toast.error("Por favor, insira uma quantidade válida.");
       return;
     }
 

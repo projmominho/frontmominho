@@ -3,7 +3,8 @@ import { AppContext } from "../providers/context";
 import { LogoTitle } from "../components/logo-title";
 import { Header } from "../components/header";
 import type { CartItem } from "../types";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { EmptyCart } from "../components/empty-cart";
 
 export const ScreenCarrinho: React.FC = () => {
   const { cart, cartAdd, cartDelete } = useContext(AppContext);
@@ -29,26 +30,7 @@ export const ScreenCarrinho: React.FC = () => {
   );
 
   if (!cart?.length) {
-    return (
-      <div className="min-h-screen">
-        <Header />
-        <LogoTitle
-          title="Carrinho de Compras"
-          subtitle="😔 O carrinho está vazio!"
-        />
-        <div className="container mx-auto pt-8 px-4">
-          <div className="text-center bg-yellow-100 p-6 rounded-md">
-            <p className="text-lg text-gray-700 mb-4">
-              Que tal voltar à nossa{" "}
-              <div className="btn btn-primary text-white">
-                <Link to="/">🏠 Home</Link>
-              </div>{" "}
-              para escolher um cupcake delicioso e adicionar ao carrinho?
-            </p>
-          </div>
-        </div>
-      </div>
-    );
+    return <EmptyCart />;
   }
 
   return (
