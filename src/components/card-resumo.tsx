@@ -4,6 +4,9 @@ import type { ResumoPedido } from "../types";
 export const CardResumo: React.FC<{ pedido?: ResumoPedido }> = ({ pedido }) => (
   <div className="border w-full rounded-lg p-4 bg-gray-50 shadow-sm">
     <div className="mb-2">
+      <span className="text-xl font-semibold">Pedido n°:</span> {pedido?.telefone}
+    </div>
+    <div className="mb-2">
       <span className="font-semibold">Telefone:</span> {pedido?.telefone}
     </div>
     <div className="mb-2">

@@ -48,8 +48,8 @@ export const Header = () => {
         >
           <input
             type="text"
-            className="input input-bordered w-15"
-            placeholder="Número do pedido"
+            className="input input-bordered w-22"
+            placeholder="N°pedido"
             ref={pedidoIdRef}
             autoFocus
           />

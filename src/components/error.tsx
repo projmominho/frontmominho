@@ -19,7 +19,7 @@ export const Error: React.FC<{
         />
 
         <div className="mt-8 w-full alert alert-error">
-          <pre
+          <div
             className="text-xl font-semibold text-center"
             dangerouslySetInnerHTML={{
               __html: error?.response?.data?.detail?.message || message,
