@@ -5,10 +5,12 @@ import { toast } from "react-hot-toast";
 import { AppContext } from "../../providers/context";
 import { LogoTitle } from "../../components/logo-title";
 import { ListaCupcake } from "./components/lista-cupcake";
+import { ListaPedidos } from "./components/lista-pedido";
 
 export const ScreenAdmin: React.FC = () => {
   const [key, setKey] = useState("");
   const { baseurl, adminKey, addAdminKey } = use(AppContext);
+  const [metodo, setMetodo] = useState<"cupcakes" | "pedidos">("pedidos");
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -64,7 +66,30 @@ export const ScreenAdmin: React.FC = () => {
                 </button>
               </>
             ) : (
-              <ListaCupcake />
+              <div className="container mx-auto py-8">
+                <div className="flex gap-4 mb-6">
+                  <button
+                    type="button"
+                    className={`btn ${metodo === "pedidos" ? "btn-primary" : "btn-outline"}`}
+                    onClick={() => setMetodo("pedidos")}
+                  >
+                    Pedidos
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`btn ${metodo === "cupcakes" ? "btn-primary" : "btn-outline"}`}
+                    onClick={() => setMetodo("cupcakes")}
+                  >
+                    Cupcakes
+                  </button>
+                </div>
+
+                <div className="w-full">
+                  {metodo === "cupcakes" && <ListaCupcake />}
+                  {metodo === "pedidos" && <ListaPedidos />}
+                </div>
+              </div>
             )}
           </div>
         </div>
