@@ -11,6 +11,8 @@ type AppContextType = {
   addressAdd: (address: string) => void;
   phone: string;
   phoneAdd: (phone: string) => void;
+  adminKey: string;
+  addAdminKey: (phone: string) => void;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -23,4 +25,6 @@ export const AppContext = createContext<AppContextType>({
   addressAdd: () => {},
   phone: "",
   phoneAdd: () => {},
+  adminKey: "",
+  addAdminKey: () => {},
 });

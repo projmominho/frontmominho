@@ -62,6 +62,16 @@ export const ProviderContext: FC<PropsWithChildren> = ({ children }) => {
     [setAddress]
   );
 
+  const [adminKey, setAdminKey] = useState<string>(loadLocalStorage("adminKey", ""));
+
+  const addAdminKey = useCallback(
+    (newAdminKey: string) => {
+      saveLocalStorage("adminKey", newAdminKey);
+      setAdminKey(newAdminKey);
+    },
+    [setAddress]
+  );
+
   return (
     <AppContext
       value={{
@@ -74,6 +84,8 @@ export const ProviderContext: FC<PropsWithChildren> = ({ children }) => {
         addressAdd,
         phone,
         phoneAdd,
+        adminKey,
+        addAdminKey,
       }}
     >
       {children}

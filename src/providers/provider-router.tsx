@@ -6,6 +6,7 @@ import { ScreenCarrinho } from "../screens/screen-carrinho";
 import { ScreenEnvio } from "../screens/screen-envio";
 import { ScreenPagamento } from "../screens/screen-pagamento";
 import { ScreenStatus } from "../screens/screen-status";
+import { ScreenAdmin } from "../screens/screen-admin";
 
 export const ProviderRouter: React.FC<PropsWithChildren> = ({ children }) => {
   return (
@@ -38,6 +39,11 @@ export const ProviderRouter: React.FC<PropsWithChildren> = ({ children }) => {
         <Route
           path="/pedido/:id"
           element={<ScreenStatus />}
+        />
+
+        <Route
+          path="/admin"
+          element={<ScreenAdmin />}
         />
         {children}
       </Routes>
